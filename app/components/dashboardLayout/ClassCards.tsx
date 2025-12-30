@@ -83,7 +83,11 @@ const ClassCards: React.FC = () => {
       try {
         const token = getToken();
         if (!token) return;
-
+        if (!API_BASE) {
+          setLoading(false);
+          alert("Konfigurasi API_BASE tidak ditemukan. Hubungi admin.");
+          return;
+        }
         const [kelasRes, mentorRes] = await Promise.all([
           fetch(`${API_BASE}/api/dashboard/kelas-saya`, {
             method: "GET",
