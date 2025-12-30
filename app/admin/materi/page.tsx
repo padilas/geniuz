@@ -32,7 +32,7 @@ interface Task {
 }
 
 export default function AdminMateri() {
-  const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+  const API = process.env.NEXT_PUBLIC_API_BASE;
   const router = useRouter();
 
   // Helper: get auth headers from either Supabase or backend JWT

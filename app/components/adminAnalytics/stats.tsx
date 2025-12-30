@@ -18,7 +18,7 @@ type AnalyticsApi = {
   error?: string
 }
 
-const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000"
+const API = process.env.NEXT_PUBLIC_API_BASE
 function formatIDR(n: number) {
   return new Intl.NumberFormat("id-ID", {
     style: "currency",

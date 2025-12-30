@@ -16,7 +16,7 @@ export default async function SiswaDetailPage({ params }: { params: { idUser: st
     return <div className="p-10 text-center text-red-500">ID User tidak ditemukan di URL.</div>;
   }
 
-  const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+  const API = process.env.NEXT_PUBLIC_API_BASE;
   const API_URL = API;
 
   // Fetch all biodata, pendaftaran, pembayaran from admin API

@@ -16,7 +16,7 @@ export default function LoginAdminPage() {
           ? `${window.location.protocol}//${window.location.hostname}:5000`
           : process.env.NEXT_PUBLIC_API_BASE;
 
-      const API = process.env.NEXT_PUBLIC_API_BASE || fallbackUrl;
+      const API = process.env.NEXT_PUBLIC_API_BASE;
 
       const res = await fetch(`${API}/api/admin/login`, {
         method: "POST",

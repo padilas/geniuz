@@ -360,7 +360,7 @@ const RevenueFinance: React.FC = () => {
   );
 };
 
-const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+const API = process.env.NEXT_PUBLIC_API_BASE;
 const KPICards: React.FC = () => {
   const [kpi, setKpi] = useState({
     totalKelas: 0,

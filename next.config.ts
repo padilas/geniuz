@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const API_BASE =
-  (process.env.NEXT_PUBLIC_API_BASE || "http://157.230.251.113").replace(/\/$/, "");
+  (process.env.NEXT_PUBLIC_API_BASE || "http://159.65.138.221").replace(/\/$/, "");
 
 const nextConfig: NextConfig = {
   async rewrites() {

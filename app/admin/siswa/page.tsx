@@ -32,7 +32,7 @@ interface Stats {
 }
 
 export default function SiswaPage() {
-  const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+  const API = process.env.NEXT_PUBLIC_API_BASE;
   const backendUrl = API;
   const authHeaders = (): HeadersInit => {
     const token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
