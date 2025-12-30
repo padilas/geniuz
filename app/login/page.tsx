@@ -32,7 +32,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const url = `${API_BASE}/auth/login`;
+      const url = `${API_BASE}/api/auth/login`;
       console.log("[LOGIN] POST:", url);
 
       const res = await fetch(url, {

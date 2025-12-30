@@ -6,7 +6,7 @@ import React from "react";
 
 export default function Footer() {
     return (
-        <footer className="bg-[url('/background.png')] py-16 text-white overflow-hidden relative">
+        <footer className="bg-[url('/Background.png')] py-16 text-white overflow-hidden relative">
             
             {/* Background Stripes (Horizontal blue lines in image) */}
             <div className="absolute inset-0 z-0 opacity-20 pointer-events-none">
