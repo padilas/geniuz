@@ -85,7 +85,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[url('/background.png')] bg-cover bg-center">
+    <div className="flex min-h-screen items-center justify-center bg-[url('/Background.png')] bg-cover bg-center">
       <div className="top-9 fixed justify-center">
         <Image src="/logo_putih.svg" alt="Les2an Geniuz" width={140} height={50} />
       </div>

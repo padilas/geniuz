@@ -48,7 +48,7 @@ export default function LoginAdminPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[url('/background.png')]">
+    <div className="flex min-h-screen items-center justify-center bg-[url('/Background.png')]">
       <div className="bg-white/95 p-10 rounded-3xl shadow-xl w-full max-w-[520px] text-center">
 
         <h1 className="text-4xl font-extrabold text-gray-900 mb-4">
