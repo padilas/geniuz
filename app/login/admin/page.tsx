@@ -34,7 +34,7 @@ export default function LoginAdminPage() {
         // Simpan token ke localStorage agar bisa digunakan untuk auth
         localStorage.setItem("admin_token", data.token);
         // Set cookie admin_token agar bisa diakses server component/layout
-        document.cookie = `admin_token=${data.token}; path=/; secure; samesite=strict`;
+        // document.cookie = `admin_token=${data.token}; path=/; secure; samesite=strict`;
         router.push("/admin/dashboard");
       } else {
         alert("Login gagal: token tidak diterima dari server.");

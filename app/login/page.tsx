@@ -32,7 +32,7 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const url = `${API_BASE}/api/auth`;
+      const url = `${API_BASE}/api/auth/login`;
       console.log("[LOGIN] POST:", url);
 
       const res = await fetch(url, {
@@ -76,7 +76,7 @@ export default function LoginPage() {
 
       localStorage.setItem(TOKEN_KEY, token);
       // Simpan juga ke cookie agar bisa diakses server component/layout
-      document.cookie = `access_token=${token}; path=/; secure; samesite=strict`;
+      // document.cookie = `access_token=${token}; path=/; secure; samesite=strict`;
       router.replace("/dashboard");
     } catch (err: any) {
       console.error("[LOGIN] error:", err);
