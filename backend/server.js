@@ -79,6 +79,13 @@ app.listen(process.env.PORT || 5000, () => {
 })
 
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: (origin, callback) => {
+    const allowed = (process.env.CORS_ORIGIN || '').split(',').map(o => o.trim());
+    if (!origin || allowed.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
