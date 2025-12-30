@@ -33,7 +33,7 @@ const Achievements: React.FC = () => {
       }
 
       try {
-        const response = await fetch(`${API_BASE}/dashboard/achievement`, {
+        const response = await fetch(`${API_BASE}/api/dashboard/achievement`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await response.json();

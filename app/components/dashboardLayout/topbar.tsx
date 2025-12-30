@@ -22,7 +22,11 @@ const Topbar: React.FC = () => {
       try {
         const token = getToken();
         if (!token) return;
-        const response = await fetch(`${API_BASE}/me/profile`, {
+        if (!API_BASE) {
+          alert("Konfigurasi API_BASE tidak ditemukan. Hubungi admin.");
+          return;
+        }
+        const response = await fetch(`${API_BASE}/api/me/profile`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });

@@ -55,7 +55,7 @@ export default function TaskDetailPage({ params }: { params: Promise<{ tugasId: 
           return;
         }
 
-        const profileRes = await fetch(`${API_BASE}/me/profile`, {
+        const profileRes = await fetch(`${API_BASE}/api/me/profile`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });

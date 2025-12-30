@@ -38,12 +38,14 @@ export default function PengaturanPage() {
           router.replace("/login");
           return;
         }
-
-        const response = await fetch(`${API_BASE}/me/profile`, {
+        if (!API_BASE) {
+          alert("Konfigurasi API_BASE tidak ditemukan. Hubungi admin.");
+          return;
+        }
+        const response = await fetch(`${API_BASE}/api/me/profile`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
         });
-
         if (response.ok) {
           const data = await response.json();
           setUserData(data);
@@ -84,7 +86,7 @@ export default function PengaturanPage() {
     try {
       setSaving(true);
       const token = getToken();
-      const res = await fetch(`${API_BASE}/me/update`, {
+      const res = await fetch(`${API_BASE}/api/me/update`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',

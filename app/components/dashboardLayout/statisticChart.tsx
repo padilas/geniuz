@@ -40,7 +40,7 @@ const StatisticsChart: React.FC = () => {
       }
 
       try {
-        const response = await fetch(`${API_BASE}/dashboard/statistik`, {
+        const response = await fetch(`${API_BASE}/api/dashboard/statistik`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await response.json();

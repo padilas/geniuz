@@ -35,7 +35,12 @@ export default function SiswaPage() {
   const API = process.env.NEXT_PUBLIC_API_BASE;
   const backendUrl = API;
   const authHeaders = (): HeadersInit => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+    // Ambil token dari localStorage, jika tidak ada fallback ke cookie
+    let token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+    if (!token && typeof document !== "undefined") {
+      const match = document.cookie.match(/(?:^|; )admin_token=([^;]*)/);
+      token = match ? decodeURIComponent(match[1]) : null;
+    }
     return token ? { Authorization: `Bearer ${token}` } : {};
   };
 

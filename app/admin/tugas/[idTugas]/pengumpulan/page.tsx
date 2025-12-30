@@ -22,17 +22,26 @@ export default function PengumpulanTugasPage({ params }: { params: Promise<{ idT
     const handleSubmitNilai = async (idPengumpulan: string) => {
       setSaving((prev) => ({ ...prev, [idPengumpulan]: true }));
       try {
+        // Get token from localStorage or cookie
+        let token = "";
+        if (typeof window !== "undefined") {
+          token = localStorage.getItem("admin_token") || "";
+        }
+        if (!token && typeof document !== "undefined") {
+          const match = document.cookie.match(/(?:^|; )admin_token=([^;]*)/);
+          token = match ? decodeURIComponent(match[1]) : "";
+        }
         const res = await fetch(`/api/admin/tugas/${idTugas}/pengumpulan/${idPengumpulan}/nilai`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${typeof window !== "undefined" ? localStorage.getItem("admin_token") : ""}`,
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ nilai: nilaiInput[idPengumpulan] }),
         });
         if (res.ok) {
           // Update nilai pada submissions
-          setSubmissions((prev) => prev.map((item) =>
+          setSubmissions((prev: any[]) => prev.map((item: any) =>
             item.id_Pengumpulan === idPengumpulan
               ? { ...item, nilai: nilaiInput[idPengumpulan] }
               : item
@@ -52,8 +61,14 @@ export default function PengumpulanTugasPage({ params }: { params: Promise<{ idT
     const fetchData = async () => {
       setLoading(true);
       try {
+        // Ambil token dari localStorage, jika tidak ada fallback ke cookie
+        let token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : "";
+        if (!token && typeof document !== "undefined") {
+          const match = document.cookie.match(/(?:^|; )admin_token=([^;]*)/);
+          token = match ? decodeURIComponent(match[1]) : "";
+        }
         const res = await fetch(`/api/admin/tugas/${idTugas}/pengumpulan`, {
-          headers: { Authorization: `Bearer ${typeof window !== "undefined" ? localStorage.getItem("admin_token") : ""}` },
+          headers: { Authorization: `Bearer ${token}` },
         });
         const json = await res.json();
         if (res.ok) setSubmissions(json);

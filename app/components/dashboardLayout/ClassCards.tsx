@@ -85,12 +85,12 @@ const ClassCards: React.FC = () => {
         if (!token) return;
 
         const [kelasRes, mentorRes] = await Promise.all([
-          fetch(`${API_BASE}/dashboard/kelas-saya`, {
+          fetch(`${API_BASE}/api/dashboard/kelas-saya`, {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
             signal: controller.signal,
           }),
-          fetch(`${API_BASE}/mentor`, {
+          fetch(`${API_BASE}/api/mentor`, {
             method: "GET",
             signal: controller.signal,
           }),

@@ -17,7 +17,13 @@ const SiswaPerFakultasPieChart = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+        // Ambil token dari localStorage, jika tidak ada fallback ke cookie
+        let token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+        if (!token && typeof document !== "undefined") {
+          const match = document.cookie.match(/(?:^|; )admin_token=([^;]*)/);
+          token = match ? decodeURIComponent(match[1]) : null;
+        }
+        if (!token) return setLoading(false);
         if (!token) return setLoading(false);
         const fakultasRes = await fetch(`${API}/api/admin/fakultas`, {
           headers: { Authorization: `Bearer ${token}` },

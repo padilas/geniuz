@@ -20,7 +20,12 @@ export default function AdminKelasDetail({ params }: { params: Promise<{ idFakul
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+        // Ambil token dari localStorage, jika tidak ada fallback ke cookie
+        let token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+        if (!token && typeof document !== "undefined") {
+          const match = document.cookie.match(/(?:^|; )admin_token=([^;]*)/);
+          token = match ? decodeURIComponent(match[1]) : null;
+        }
         if (!token) return;
         const res = await fetch(`/api/admin/kelas/${idKelas}` , {
           headers: { Authorization: `Bearer ${token}` },

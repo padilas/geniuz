@@ -116,6 +116,10 @@ const SidebarAdmin = () => {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     localStorage.removeItem("admin_token");
+    // Hapus cookie admin_token
+    if (typeof document !== "undefined") {
+      document.cookie = "admin_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+    }
     router.push("/login");
   };
 

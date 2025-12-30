@@ -46,7 +46,7 @@ const SearchBar = () => {
         const token = getToken();
         if (!token) return;
 
-        const res = await fetch(`${API_BASE}/dashboard/kelas-saya`, {
+        const res = await fetch(`${API_BASE}/api/dashboard/kelas-saya`, {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
           signal: controller.signal,

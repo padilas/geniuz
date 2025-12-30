@@ -20,19 +20,21 @@ const Overview: React.FC = () => {
     const fetchData = async () => {
       const token = getToken();
       if (!token) { router.replace("/login"); return; }
-
+      if (!API_BASE) {
+        setLoading(false);
+        alert("Konfigurasi API_BASE tidak ditemukan. Hubungi admin.");
+        return;
+      }
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const [pRes, mRes, oRes] = await Promise.all([
-          fetch(`${API_BASE}/dashboard/profile`, { headers }),
-          fetch(`${API_BASE}/me/profile`, { headers }),
-          fetch(`${API_BASE}/dashboard/overview`, { headers })
+          fetch(`${API_BASE}/api/dashboard/profile`, { headers }),
+          fetch(`${API_BASE}/api/me/profile`, { headers }),
+          fetch(`${API_BASE}/api/dashboard/overview`, { headers })
         ]);
-
         const prof = await pRes.json();
         const me = await mRes.json();
         const ov = await oRes.json();
-
         setProfile(prof);
         setFotoProfil(me?.foto_profil || "");
         setStatistics({

@@ -45,7 +45,12 @@ export default function EditBiodataForm({ siswaDetail, pendaftaran }: { siswaDet
     }
     // Fallback ke localStorage
     if (typeof window !== "undefined") {
-      return localStorage.getItem("admin_token") || "";
+      let token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : "";
+      if (!token && typeof document !== "undefined") {
+        const match = document.cookie.match(/(?:^|; )admin_token=([^;]*)/);
+        token = match ? decodeURIComponent(match[1]) : "";
+      }
+      return token;
     }
     return "";
   }

@@ -30,7 +30,11 @@ export default function TaskForm({
         tanggal_selesai: endDate || null,
       };
 
-      const token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+      let token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+      if (!token && typeof document !== "undefined") {
+        const match = document.cookie.match(/(?:^|; )admin_token=([^;]*)/);
+        token = match ? decodeURIComponent(match[1]) : null;
+      }
 
       const res = await fetch(`${API}/api/admin/tugas`, {
         method: "POST",

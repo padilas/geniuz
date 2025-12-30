@@ -28,7 +28,7 @@ const Activities: React.FC = () => {
       if (!token) return;
 
       try {
-        const response = await fetch(`${API_BASE}/dashboard/activity`, {
+        const response = await fetch(`${API_BASE}/api/dashboard/activity`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await response.json();

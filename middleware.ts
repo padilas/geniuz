@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export function middleware(req: NextRequest) {
-  const token = req.cookies.get("admin_id")?.value;
+  const token = req.cookies.get("admin_token")?.value;
 
   const protectedPaths = ["/admin", "/api/kelas", "/api/fakultas", "/api/mentor"];
 

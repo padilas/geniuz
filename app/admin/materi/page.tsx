@@ -43,7 +43,12 @@ export default function AdminMateri() {
       return { Authorization: `Bearer ${session.access_token}` };
     }
     // 2. Try backend JWT
-    const token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+    // Ambil token dari localStorage, jika tidak ada fallback ke cookie
+    let token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+    if (!token && typeof document !== "undefined") {
+      const match = document.cookie.match(/(?:^|; )admin_token=([^;]*)/);
+      token = match ? decodeURIComponent(match[1]) : null;
+    }
     if (token) {
       return { Authorization: `Bearer ${token}` };
     }

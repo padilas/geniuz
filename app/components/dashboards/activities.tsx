@@ -19,7 +19,11 @@ const DashboardActivities = () => {
       setLoading(true);
       setError("");
       try {
-        const token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+        let token = typeof window !== "undefined" ? localStorage.getItem("admin_token") : null;
+        if (!token && typeof document !== "undefined") {
+          const match = document.cookie.match(/(?:^|; )admin_token=([^;]*)/);
+          token = match ? decodeURIComponent(match[1]) : null;
+                }
         if (!token) {
           setError("Admin token not found. Please login again.");
           setLoading(false);
