@@ -46,6 +46,14 @@ export async function register(req, res) {
     if (error) return res.status(500).json({ error: error.message });
 
     const token = signToken({ id_User: data.id_User, email: data.email });
+    // Set cookie agar bisa diakses server component/layout
+    res.cookie('access_token', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 hari
+    });
     return res.status(201).json({
       message: "Registrasi berhasil",
       user: data,
@@ -66,7 +74,11 @@ export async function login(req, res) {
     // DEBUG: biar tau payload masuk bener apa nggak
     console.log("[LOGIN BODY]", { email, hasPassword: !!password, passLen: password.length });
 
-    if (!email || !password) return res.status(400).json({ error: "Email & password wajib" });
+
+    if (!email || !password) {
+      console.error("[LOGIN ERROR] Email/password kosong", { email, passwordLen: password.length });
+      return res.status(400).json({ error: "Email & password wajib" });
+    }
 
     const { data: user, error } = await supabaseAdmin
       .from(TABLE)
@@ -77,8 +89,11 @@ export async function login(req, res) {
     // DEBUG: ketemu user atau nggak
     console.log("[LOGIN SELECT]", { found: !!user, error: error?.message || null });
 
-    // untuk keamanan: tetap balikin pesan sama
-    if (error || !user) return res.status(401).json({ error: "Email atau password salah" });
+    if (error || !user) {
+      console.error("[LOGIN ERROR] User tidak ditemukan atau error DB", { error });
+      // untuk keamanan: tetap balikin pesan sama
+      return res.status(401).json({ error: "Email atau password salah" });
+    }
 
     // DEBUG: password field kebaca atau nggak
     console.log("[LOGIN PASSWORD FIELD]", {
@@ -86,20 +101,34 @@ export async function login(req, res) {
       prefix: user.password ? String(user.password).slice(0, 4) : null,
     });
 
+
     if (!user.password) {
       // biasanya karena env supabaseAdmin salah (bukan service role) / policy keblok
-      console.error("[LOGIN ERROR] Password hash tidak kebaca dari DB.");
+      console.error("[LOGIN ERROR] Password hash tidak kebaca dari DB.", { user });
       return res.status(401).json({ error: "Email atau password salah" });
     }
+
 
     const ok = await bcrypt.compare(password, user.password);
 
     // DEBUG: bcrypt match?
     console.log("[LOGIN BCRYPT]", { ok });
 
-    if (!ok) return res.status(401).json({ error: "Email atau password salah" });
+    if (!ok) {
+      console.error("[LOGIN ERROR] Password tidak cocok", { email });
+      return res.status(401).json({ error: "Email atau password salah" });
+    }
 
     const token = signToken({ id_User: user.id_User, email: user.email });
+
+    // Set cookie agar bisa diakses server component/layout
+    res.cookie('access_token', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 hari
+    });
 
     // jangan bocorin hash
     delete user.password;

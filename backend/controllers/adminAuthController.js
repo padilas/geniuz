@@ -32,6 +32,14 @@ export const adminLogin = async (req, res) => {
       { expiresIn: '1d' }
     )
 
+    // Set cookie agar bisa diakses server component/layout
+    res.cookie('admin_token', token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'strict',
+      path: '/',
+      maxAge: 7 * 24 * 60 * 60 * 1000 // 7 hari
+    });
     return res.status(200).json({
       message: 'Login success',
       admin: { id: admin.id, nama: admin.nama, email: admin.email },
