@@ -15,7 +15,7 @@ interface Kelas {
 }
 
 const ClassesDashboard = () => {
-  const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+  const API = process.env.NEXT_PUBLIC_API_BASE;
   const [data, setData] = useState<Kelas[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

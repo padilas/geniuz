@@ -32,7 +32,7 @@ export default function DataDiriPage() {
     semester: "",
   });
 
-  const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+  const API = process.env.NEXT_PUBLIC_API_BASE;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

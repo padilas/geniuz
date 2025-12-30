@@ -8,7 +8,7 @@ export default function PaymentPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+  const API = process.env.NEXT_PUBLIC_API_BASE;
 
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();

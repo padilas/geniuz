@@ -14,7 +14,7 @@ export default function LoginAdminPage() {
       const fallbackUrl =
         typeof window !== "undefined"
           ? `${window.location.protocol}//${window.location.hostname}:5000`
-          : process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+          : process.env.NEXT_PUBLIC_API_BASE;
 
       const API = process.env.NEXT_PUBLIC_API_BASE || fallbackUrl;
 

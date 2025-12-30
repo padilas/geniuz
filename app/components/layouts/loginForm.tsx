@@ -11,7 +11,7 @@ export default function HeroSection() {
   const [error, setError] = useState("");
 
   // URL backend (pastikan sudah ada .env.local → NEXT_PUBLIC_API_BASE)
-  const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+  const API = process.env.NEXT_PUBLIC_API_BASE;
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();

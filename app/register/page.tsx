@@ -14,8 +14,8 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
-  // URL backend dari env (fallback ke localhost:5000)
-  const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+  // URL backend dari env
+  const API = process.env.NEXT_PUBLIC_API_BASE;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();

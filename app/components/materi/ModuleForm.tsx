@@ -11,7 +11,7 @@ export default function ModuleForm({
   onCreate: (m: any) => void;
   onCancel: () => void;
 }) {
-  const API = process.env.NEXT_PUBLIC_API_BASE || "http://localhost:5000";
+  const API = process.env.NEXT_PUBLIC_API_BASE;
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [urutan, setUrutan] = useState<string | number>("");

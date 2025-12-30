@@ -33,7 +33,17 @@ import checkDeadlines from './services/notificationWorker.js';
 dotenv.config()
 
 const app = express()
-app.use(cors({ origin: process.env.CORS_ORIGIN?.split(',') || true, credentials: true }))
+app.use(cors({
+  origin: (origin, callback) => {
+    const allowed = (process.env.CORS_ORIGIN || '').split(',').map(o => o.trim());
+    if (!origin || allowed.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}))
 app.use(express.json())
 
 app.get('/', (_, res) => res.send('API OK'))
@@ -78,14 +88,3 @@ app.listen(process.env.PORT || 5000, () => {
   console.log(`Backend ready on http://localhost:${process.env.PORT || 5000}`)
 })
 
-app.use(cors({
-  origin: (origin, callback) => {
-    const allowed = (process.env.CORS_ORIGIN || '').split(',').map(o => o.trim());
-    if (!origin || allowed.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));

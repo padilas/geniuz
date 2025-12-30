@@ -41,7 +41,7 @@ export default function TaskDetailPage({ params }: { params: Promise<{ tugasId: 
   const [userData, setUserData] = useState<any>(null);
   const [existingSubmission, setExistingSubmission] = useState<SubmissionData | null>(null);
 
-  const API_BASE = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5000/api", []);
+  const API_BASE = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL, []);
 
   // Status: Terkunci jika sudah diberi nilai oleh admin
   const isLocked = useMemo(() => existingSubmission?.nilai !== null && existingSubmission?.nilai !== undefined, [existingSubmission]);
