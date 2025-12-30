@@ -9,7 +9,7 @@ interface Aktivitas {
 }
 
 const DashboardActivities = () => {
-  const API = process.env.NEXT_PUBLIC_API_BASE;
+  const API = process.env.NEXT_PUBLIC_API_BASE || "/api";
   const [activities, setActivities] = useState<Aktivitas[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

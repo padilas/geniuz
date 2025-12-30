@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 
 export default function DashboardStats() {
-  const API = process.env.NEXT_PUBLIC_API_BASE;
+  const API = process.env.NEXT_PUBLIC_API_BASE || "/api";
   const [stats, setStats] = useState({
     totalKelas: 0,
     siswaAktif: 0,

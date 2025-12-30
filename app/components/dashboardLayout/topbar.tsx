@@ -15,7 +15,7 @@ const Topbar: React.FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const API_BASE = useMemo(() => process.env.NEXT_PUBLIC_API_BASE, []);
+  const API_BASE = useMemo(() => process.env.NEXT_PUBLIC_API_BASE || "/api", []);
 
   useEffect(() => {
     const fetchProfile = async () => {
@@ -184,9 +184,9 @@ const Topbar: React.FC = () => {
           <Link href="/settings">
             <div className="w-10 h-10 rounded-full overflow-hidden bg-gray-200 border border-gray-200 cursor-pointer flex items-center justify-center transition hover:scale-105">
               <Image
-                src={fotoProfil || "/default-profile.png"} 
+                src={fotoProfil || "/placeholder-user.jpg"} 
                 alt="Profile" width={40} height={40} className="w-full h-full object-cover"
-                onError={(e) => { (e.target as HTMLImageElement).src = '/default-profile.png'; }}
+                onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder-user.jpg'; }}
               />
             </div>
           </Link>
