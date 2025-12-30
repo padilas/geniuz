@@ -1,0 +1,21 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #064479;
+  --color-accent: #FFF000;
+  --color-bg: #EFF2F6;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: #1a1a1a;
+  font-family: 'Poppins', 'Roboto', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
