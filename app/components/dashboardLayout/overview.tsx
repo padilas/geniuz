@@ -14,7 +14,7 @@ const Overview: React.FC = () => {
   const [statistics, setStatistics] = useState({ totalClasses: 0, completedTasks: 0, progress: 0 });
 
   const router = useRouter();
-  const API_BASE = useMemo(() => process.env.NEXT_PUBLIC_API_BASE_URL, []);
+  const API_BASE = useMemo(() => process.env.NEXT_PUBLIC_API_BASE || "/api", []);
 
   useEffect(() => {
     const fetchData = async () => {

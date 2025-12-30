@@ -72,7 +72,7 @@ const ClassCards: React.FC = () => {
   const router = useRouter();
 
   const API_BASE = useMemo(
-    () => process.env.NEXT_PUBLIC_API_BASE_URL,
+    () => process.env.NEXT_PUBLIC_API_BASE || "/api",
     []
   );
 

@@ -75,8 +75,8 @@ export default function LoginPage() {
       }
 
       localStorage.setItem(TOKEN_KEY, token);
-      // Simpan juga ke cookie agar bisa diakses server component/layout
-      // document.cookie = `access_token=${token}; path=/; secure; samesite=strict`;
+      // Simpan juga ke cookie untuk user auth middleware
+      document.cookie = `access_token=${token}; path=/; max-age=86400; samesite=lax`;
       router.replace("/dashboard");
     } catch (err: any) {
       console.error("[LOGIN] error:", err);

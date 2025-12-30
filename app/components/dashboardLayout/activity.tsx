@@ -18,7 +18,7 @@ const Activities: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const API_BASE = useMemo(
-    () => process.env.NEXT_PUBLIC_API_BASE_URL,
+    () => process.env.NEXT_PUBLIC_API_BASE || "/api",
     []
   );
 

@@ -41,10 +41,12 @@ const Sidebar: React.FC = () => {
   const WHATSAPP_NUMBER = "6285524450205"; 
   const WHATSAPP_MESSAGE = encodeURIComponent("Halo Geniuz Support, saya butuh bantuan terkait layanan...");
 
-  const API_BASE = useMemo(() => process.env.NEXT_PUBLIC_API_BASE, []);
+  const API_BASE = useMemo(() => process.env.NEXT_PUBLIC_API_BASE || "/api", []);
 
   const handleLogout = () => {
     clearToken();
+    // Hapus cookie access_token juga
+    document.cookie = "access_token=; path=/; max-age=0";
     router.replace("/login");
   };
 

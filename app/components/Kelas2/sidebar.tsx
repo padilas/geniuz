@@ -42,7 +42,7 @@ const Sidebar: React.FC = () => {
   const pathname = usePathname();
 
   const API_BASE = useMemo(
-    () => process.env.NEXT_PUBLIC_API_BASE_URL,
+    () => process.env.NEXT_PUBLIC_API_BASE || "/api",
     []
   );
 
@@ -111,6 +111,7 @@ const Sidebar: React.FC = () => {
 
   const handleLogout = () => {
     clearToken();
+    document.cookie = "access_token=; path=/; max-age=0";
     router.replace("/login");
   };
 
